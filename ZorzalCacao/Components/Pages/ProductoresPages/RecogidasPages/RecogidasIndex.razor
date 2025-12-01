@@ -1,5 +1,7 @@
 ﻿@page "/RecogidaP/Index"
+@using System.Security.Claims
 @inject RecogidasService recogidasService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
 
 <PageTitle> Consulta recogidas </PageTitle>
@@ -113,21 +115,44 @@
 
     public List<Recogidas> ListaRecogidas { get; set; } = new List<Recogidas>();
 
+    private string? userId;
+
     protected override async Task OnInitializedAsync()
     {
+        // Obtener el ID del usuario logueado UNA SOLA VEZ
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        }
+
         await Buscar();
     }
 
     public async Task Buscar()
     {
-        // IMPORTANTE: Asegúrate de incluir el Productor en la consulta
-        var lista = await recogidasService.Listar(R => true);
+        var lista = new List<Recogidas>();
 
+        // Si el usuario está autenticado y tiene userId, filtrar por productor
+        if (!string.IsNullOrEmpty(userId))
+        {
+            lista = await recogidasService.Listar(r => r.ProductorId == userId);
+        }
+        else
+        {
+            // Si no hay userId (por si acaso), traer todas (o lista vacía)
+            lista = await recogidasService.Listar(r => true);
+        }
+
+        // Filtrar por fechas
         if (Desde.HasValue && Hasta.HasValue)
         {
             lista = lista.Where(r => r.Fecha >= Desde && r.Fecha <= Hasta).ToList();
         }
 
+        // Filtrar por otros criterios
         if (!string.IsNullOrEmpty(ValorFiltro))
         {
             if (Filtro == nameof(Recogidas.RecogidaId) && int.TryParse(ValorFiltro, out int id))
@@ -140,7 +165,8 @@
             }
             else if (Filtro == nameof(Recogidas.Productor))
             {
-                lista = lista.Where(r => r.Productor != null && r.Productor.UserName.Contains(ValorFiltro, StringComparison.OrdinalIgnoreCase)).ToList();
+                lista = lista.Where(r => r.Productor != null &&
+                    r.Productor.UserName.Contains(ValorFiltro, StringComparison.OrdinalIgnoreCase)).ToList();
             }
             else if (Filtro == nameof(Recogidas.PuntoEncuentro))
             {
@@ -160,6 +186,7 @@
                 lista = lista.Where(r => r.Chofer.Contains(ValorFiltro, StringComparison.OrdinalIgnoreCase)).ToList();
             }
         }
+
         ListaRecogidas = lista;
     }
 }
