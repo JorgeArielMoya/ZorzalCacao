@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ZorzalCacao.Data;
 
 namespace ZorzalCacao.Models;
 
@@ -13,6 +14,6 @@ public class ControlesCalidad
     public string Decision { get; set; } = null!;
     public int RecogidaId { get; set; }
     public Recogidas Recogida { get; set; }
-
-    //empleado
+    public string EmpleadoId { get; set; }
+    public ApplicationUser Empleado { get; set; }
 }

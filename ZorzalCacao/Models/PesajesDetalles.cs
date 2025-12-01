@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ZorzalCacao.Data;
 
 namespace ZorzalCacao.Models;
 
@@ -17,4 +18,6 @@ public class PesajesDetalles
 
     [ForeignKey(nameof(SacoId))]
     public virtual Sacos Saco { get; set; }
+    public string EmpleadoId { get; set; }
+    public ApplicationUser Empleado { get; set; }
 }

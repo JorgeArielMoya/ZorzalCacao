@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ZorzalCacao.Data;
 
 namespace ZorzalCacao.Models;
 
@@ -19,4 +20,6 @@ public class FermentacionesDetalles
     [ForeignKey(nameof(RemocionId))]
     public virtual Remociones Remocion { get; set; }
     // empleado
+    public string EmpleadoId { get; set; }
+    public ApplicationUser Empleado { get; set; }
 }

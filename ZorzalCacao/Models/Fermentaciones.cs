@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ZorzalCacao.Data;
 
 namespace ZorzalCacao.Models;
 
@@ -16,6 +17,8 @@ public class Fermentaciones
     public DateTime Fecha { get; set; } = DateTime.Now;
     public int RecogidaId { get; set; }
     public Recogidas Recogida { get; set; }
-    public ICollection<FermentacionesDetalles> FermentacionesDetalle { get; set; } = new List<FermentacionesDetalles>();
     // empleado
+    public string EmpleadoId { get; set; }
+    public ApplicationUser Empleado { get; set; }
+    public ICollection<FermentacionesDetalles> FermentacionesDetalle { get; set; } = new List<FermentacionesDetalles>();
 }
