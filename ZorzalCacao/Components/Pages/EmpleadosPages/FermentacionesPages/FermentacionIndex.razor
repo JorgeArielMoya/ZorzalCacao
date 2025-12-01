@@ -2,12 +2,96 @@
 @inject FermentacionesService fermentacionesServices
 @rendermode InteractiveServer
 
+<PageTitle> Consulta Fermentacion </PageTitle>
+
+<div class="container mt-3">
+    <div class="card shadow-lg">
+        <div class="card-header">
+            <h5 class="card-title text-center"> Consulte sus fermentaciones </h5>
+
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-info bi bi-plus-square"> Crear fermentacion </a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6 mb-3">
+                    <label class="col-form-label"> <strong> Desde </strong></label>
+                    <InputDate class="form-control" @bind-Value="Desde" />
+                </div>
+
+                <div class="col-12 col-md-6 mb-3">
+                    <label class="col-form-label"> <strong> Hasta </strong></label>
+                    <InputDate class="form-control" @bind-Value="Hasta" />
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-12 col-md-6 mb-3">
+                    <label class="col-form-label"> <strong> Filtrar por </strong></label>
+                    <InputSelect class="form-select" @bind-Value="Filtro">
+                        <option value="" selected disabled> Seleccione una opcion </option>
+                        <option value="RecogidaId"> Recogida Id </option>
+                        <option value="Productor"> Productor </option>
+                        <option value="PuntoEncuentro"> Punto de encuentro </option>
+                        <option value="CertificacionesProducto"> Certificaciones </option>
+                        <option value="EstadoEntrega"> Estado entrega </option>
+                        <option value="CantidadSacos"> Cantidad de sacos  </option>
+                        <option value="Chofer"> Chofer </option>
+                    </InputSelect>
+                </div>
+
+                <div class="col-12 col-md-6 mb-3">
+                    <label class="col-form-label"> <strong> Busqueda </strong></label>
+                    <div class="input-group">
+                        <input class="form-control" @bind="ValorFiltro" placeholder="Buscar" />
+                        <button class="btn btn-outline-info bi bi-search" @onclick="Buscar" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @code {
+    public string Filtro { get; set; } = null!;
+
+    public string ValorFiltro { get; set; } = string.Empty;
+
+    public DateTime? Desde { get; set; }
+
+    public DateTime? Hasta { get; set; }
+
     public List<Fermentaciones> ListaFermentaciones = new List<Fermentaciones>();
 
     protected override async Task OnInitializedAsync ()
     {
-        ListaFermentaciones = await fermentacionesServices.Listar(f => true);
+        await Buscar();
     }
 
+    public async Task Buscar()
+    {
+        var lista = await fermentacionesServices.Listar(R => true);
+
+        if (Desde.HasValue && Hasta.HasValue)
+        {
+            lista = lista.Where(f => f.Fecha >= Desde && f.Fecha <= Hasta).ToList();
+        }
+
+        if (!string.IsNullOrEmpty(ValorFiltro))
+        {
+            if (Filtro == nameof(Fermentaciones.FermentacionId) && int.TryParse(ValorFiltro, out int id))
+            {
+                lista = lista.Where(f => f.FermentacionId == id).ToList();
+            }
+
+            else if (Filtro == nameof(Fermentaciones.Temperatura) && double.TryParse(ValorFiltro, out double temp))
+            {
+                
+            }
+        }
+            
+        ListaFermentaciones = lista;
+    }
 }
