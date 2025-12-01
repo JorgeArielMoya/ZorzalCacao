@@ -5,9 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-ZorzalCacao-f0c7ce79-00c1-4bb1-bb2b-38b1043655ea</UserSecretsId>
-	<MigrationsOutputDir>Data/Migrations</MigrationsOutputDir>
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
-	<MigrationsOutputDir>Data/Migrations</MigrationsOutputDir>
   </PropertyGroup>
 
   <ItemGroup>
