@@ -335,16 +335,10 @@ namespace ZorzalCacao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PesajeId"));
 
-                    b.Property<string>("EmpleadoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.HasKey("PesajeId");
-
-                    b.HasIndex("EmpleadoId");
 
                     b.ToTable("Pesajes");
                 });
@@ -360,10 +354,6 @@ namespace ZorzalCacao.Migrations
                     b.Property<double>("Cantidad")
                         .HasColumnType("float");
 
-                    b.Property<string>("EmpleadoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("PesajeId")
                         .HasColumnType("int");
 
@@ -374,8 +364,6 @@ namespace ZorzalCacao.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("DetalleId");
-
-                    b.HasIndex("EmpleadoId");
 
                     b.HasIndex("PesajeId");
 
@@ -403,10 +391,6 @@ namespace ZorzalCacao.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmpleadoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("EstadoEntrega")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -423,8 +407,6 @@ namespace ZorzalCacao.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RecogidaId");
-
-                    b.HasIndex("EmpleadoId");
 
                     b.HasIndex("ProductorId");
 
@@ -522,7 +504,7 @@ namespace ZorzalCacao.Migrations
                     b.HasOne("ZorzalCacao.Data.ApplicationUser", "Empleado")
                         .WithMany()
                         .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ZorzalCacao.Models.Recogidas", "Recogida")
@@ -541,7 +523,7 @@ namespace ZorzalCacao.Migrations
                     b.HasOne("ZorzalCacao.Data.ApplicationUser", "Empleado")
                         .WithMany()
                         .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ZorzalCacao.Models.Recogidas", "Recogida")
@@ -572,7 +554,7 @@ namespace ZorzalCacao.Migrations
                     b.HasOne("ZorzalCacao.Models.Remociones", "Remocion")
                         .WithMany()
                         .HasForeignKey("RemocionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Empleado");
@@ -582,25 +564,8 @@ namespace ZorzalCacao.Migrations
                     b.Navigation("Remocion");
                 });
 
-            modelBuilder.Entity("ZorzalCacao.Models.Pesajes", b =>
-                {
-                    b.HasOne("ZorzalCacao.Data.ApplicationUser", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Empleado");
-                });
-
             modelBuilder.Entity("ZorzalCacao.Models.PesajesDetalles", b =>
                 {
-                    b.HasOne("ZorzalCacao.Data.ApplicationUser", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("ZorzalCacao.Models.Pesajes", "Pesaje")
                         .WithMany("PesajesDetalle")
                         .HasForeignKey("PesajeId")
@@ -613,8 +578,6 @@ namespace ZorzalCacao.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Empleado");
-
                     b.Navigation("Pesaje");
 
                     b.Navigation("Saco");
@@ -622,19 +585,11 @@ namespace ZorzalCacao.Migrations
 
             modelBuilder.Entity("ZorzalCacao.Models.Recogidas", b =>
                 {
-                    b.HasOne("ZorzalCacao.Data.ApplicationUser", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("ZorzalCacao.Data.ApplicationUser", "Productor")
                         .WithMany()
                         .HasForeignKey("ProductorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Empleado");
 
                     b.Navigation("Productor");
                 });

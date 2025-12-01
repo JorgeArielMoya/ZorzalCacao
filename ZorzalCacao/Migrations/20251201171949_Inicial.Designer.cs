@@ -12,8 +12,8 @@ using ZorzalCacao.Data;
 namespace ZorzalCacao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251201042434_NuevaInyeccion")]
-    partial class NuevaInyeccion
+    [Migration("20251201171949_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
