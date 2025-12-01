@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ZorzalCacao.Data;
 
 namespace ZorzalCacao.Models;
 
@@ -24,6 +25,8 @@ public class Recogidas
     public string Chofer { get; set; } = null!;
 
     //productor 
+    public string ProductorId { get; set; }
+    public ApplicationUser? Productor { get; set; }
 
     //empleado
 }
