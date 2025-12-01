@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using ZorzalCacao.Models;
 
 namespace ZorzalCacao.Data;
@@ -26,59 +27,22 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             .HasForeignKey(r => r.ProductorId)
             .OnDelete(DeleteBehavior.Restrict); // No eliminar recogidas si se borra el usuario
 
-        builder.Entity<Recogidas>()
-        .HasOne(r => r.Empleado)
-        .WithMany()
-        .HasForeignKey(r => r.EmpleadoId)
-        .OnDelete(DeleteBehavior.Restrict); // ?? Cambiar a Restrict
+        builder.Entity<FermentacionesDetalles>(entity =>
+        {
+            entity.HasOne(d => d.Fermentacion)
+                  .WithMany(f => f.FermentacionesDetalle)
+                  .HasForeignKey(d => d.FermentacionId)
+                  .OnDelete(DeleteBehavior.Cascade);
 
-        // Controles - Empleado (NO CASCADE)
-        builder.Entity<ControlesCalidad>()
-            .HasOne(c => c.Empleado)
-            .WithMany()
-            .HasForeignKey(c => c.EmpleadoId)
-            .OnDelete(DeleteBehavior.Restrict); // ?? Cambiar a Restrict
+            entity.HasOne(d => d.Remocion)
+                  .WithMany()
+                  .HasForeignKey(d => d.RemocionId)
+                  .OnDelete(DeleteBehavior.Restrict);
 
-        // Fermentaciones - Empleado (NO CASCADE)
-        builder.Entity<Fermentaciones>()
-            .HasOne(f => f.Empleado)
-            .WithMany()
-            .HasForeignKey(f => f.EmpleadoId)
-            .OnDelete(DeleteBehavior.Restrict); // ?? Cambiar a Restrict
-
-        // FermentacionesDetalles - Empleado (NO CASCADE) ?? ESTE ES EL PROBLEMA
-        builder.Entity<FermentacionesDetalles>()
-            .HasOne(fd => fd.Empleado)
-            .WithMany()
-            .HasForeignKey(fd => fd.EmpleadoId)
-            .OnDelete(DeleteBehavior.Restrict); // ?? Cambiar a Restrict
-
-        // FermentacionesDetalles - Fermentacion (CASCADE está bien)
-        builder.Entity<FermentacionesDetalles>()
-            .HasOne(fd => fd.Fermentacion)
-            .WithMany(f => f.FermentacionesDetalle)
-            .HasForeignKey(fd => fd.FermentacionId)
-            .OnDelete(DeleteBehavior.Cascade); // ?? Este puede quedar Cascade
-
-        // Pesajes - Empleado (NO CASCADE)
-        builder.Entity<Pesajes>()
-            .HasOne(p => p.Empleado)
-            .WithMany()
-            .HasForeignKey(p => p.EmpleadoId)
-            .OnDelete(DeleteBehavior.Restrict); // ?? Cambiar a Restrict
-
-        // PesajesDetalles - Empleado (NO CASCADE)
-        builder.Entity<PesajesDetalles>()
-            .HasOne(pd => pd.Empleado)
-            .WithMany()
-            .HasForeignKey(pd => pd.EmpleadoId)
-            .OnDelete(DeleteBehavior.Restrict); // ?? Cambiar a Restrict
-
-        // PesajesDetalles - Pesaje (CASCADE está bien)
-        builder.Entity<PesajesDetalles>()
-            .HasOne(pd => pd.Pesaje)
-            .WithMany(p => p.PesajesDetalle)
-            .HasForeignKey(pd => pd.PesajeId)
-            .OnDelete(DeleteBehavior.Cascade); // ?? Este puede quedar Cascade
+            entity.HasOne(d => d.Empleado)
+                  .WithMany()
+                  .HasForeignKey(d => d.EmpleadoId)
+                  .OnDelete(DeleteBehavior.Restrict);
+        });
     }
 }
