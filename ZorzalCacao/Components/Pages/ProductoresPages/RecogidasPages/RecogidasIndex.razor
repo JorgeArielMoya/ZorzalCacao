@@ -1,4 +1,4 @@
-﻿@page "/Recogida/Index"
+﻿@page "/RecogidaP/Index"
 @inject RecogidasService recogidasService
 @rendermode InteractiveServer
 
@@ -8,10 +8,6 @@
     <div class="card shadow-lg">
         <div class="card-header">
             <h5 class="text-center"> <strong> Consulte recogidas </strong></h5>
-
-            <div class="d-flex justify-content-end">
-                <a class="btn btn-info bi bi-plus-square" href="/Recogida/Create"> Solicitar recogida </a>
-            </div>
         </div>
 
         <div class="card-body">
@@ -89,8 +85,7 @@
                                     <td> @recogida.CantidadSacos</td>
                                     <td> @recogida.Chofer</td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-primary bi bi-eye" href="/Recogida/View/@recogida.RecogidaId"/>
-                                        <a class="btn btn-sm btn-outline-info bi bi-pencil-square" href="/Recogida/Edit/@recogida.RecogidaId" />
+                                        <a class="btn btn-sm btn-outline-primary bi bi-eye" href="/RecogidaP/View/@recogida.RecogidaId" />
                                     </td>
                                 </tr>
                             }
