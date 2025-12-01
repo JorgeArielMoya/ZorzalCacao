@@ -1,6 +1,13 @@
 ﻿@page "/Fermentacion/Index"
+@inject FermentacionesService fermentacionesServices
 @rendermode InteractiveServer
 
 @code {
+    public List<Fermentaciones> ListaFermentaciones = new List<Fermentaciones>();
+
+    protected override async Task OnInitializedAsync ()
+    {
+        ListaFermentaciones = await fermentacionesServices.Listar(f => true);
+    }
 
 }

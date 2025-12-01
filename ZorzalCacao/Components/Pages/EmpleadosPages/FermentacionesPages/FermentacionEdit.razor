@@ -1,5 +1,32 @@
-﻿@rendermode InteractiveServer
+﻿@page "/Fermentacion/Edit/{FermentacionId:int}"
+@inject FermentacionesService fermentacionesServices
+@inject NavigationManager navigation
+@rendermode InteractiveServer
 
 @code {
+    [Parameter]
+    public int FermentacionId { get; set; }
 
+    public Fermentaciones? Fermentacion;
+
+    protected override async Task OnInitializedAsync ()
+    {
+        Fermentacion = await fermentacionesServices.Buscar(FermentacionId);
+    }
+
+    public async Task GuardarFermentacion ()
+    {
+        if (Fermentacion != null && await fermentacionesServices.Guardar(Fermentacion))
+        {
+            navigation.NavigateTo("/Fermentacion/Index");
+        }
+    }
+
+    public async Task EliminarFermentacion()
+    {
+        if (await fermentacionesServices.Eliminar(FermentacionId))
+        {
+            navigation.NavigateTo("/Fermentacion/Index");
+        }
+    }
 }
