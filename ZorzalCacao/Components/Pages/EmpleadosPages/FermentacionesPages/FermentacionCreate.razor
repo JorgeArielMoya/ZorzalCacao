@@ -127,13 +127,13 @@
 @code {
     public Fermentaciones Fermentacion { get; set; } = new();
 
-    public FermentacionesDetalles detalleSeleccionado = new();
+    public FermentacionesDetalles detalleSeleccionado { get; set; } = new();
 
-    public List<Remociones> ListaRemociones = new();
+    public List<Remociones> ListaRemociones { get; set; } = new();
 
-    public List<ApplicationUser> ListaEmpleados = new();
+    public List<ApplicationUser> ListaEmpleados { get; set; } = new();
 
-    private List<Recogidas> ListaRecogidas = new();
+    private List<Recogidas> ListaRecogidas { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
