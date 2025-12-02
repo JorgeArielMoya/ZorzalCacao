@@ -68,6 +68,7 @@ public class PesajesService(IDbContextFactory<ApplicationDbContext> DbFactory)
         contexto.PesajesDetalles.RemoveRange(pesajeActual.PesajesDetalle);
 
         pesajeActual.Fecha = pesaje.Fecha;
+        pesajeActual.EmpleadoId = pesaje.EmpleadoId;
 
         foreach (var detalle in pesaje.PesajesDetalle)
         {
@@ -86,7 +87,10 @@ public class PesajesService(IDbContextFactory<ApplicationDbContext> DbFactory)
     public async Task<Pesajes?> Buscar(int pesajeId)
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
-        return await contexto.Pesajes.FirstOrDefaultAsync(p => p.PesajeId == pesajeId);
+        return await contexto.Pesajes
+            .Include(p => p.Empleado)
+            .Include(p => p.PesajesDetalle)
+            .FirstOrDefaultAsync(p => p.PesajeId == pesajeId);
     }
 
     public async Task<bool> Eliminar(int pesajeId)
@@ -111,6 +115,7 @@ public class PesajesService(IDbContextFactory<ApplicationDbContext> DbFactory)
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
         return await contexto.Pesajes
+            .Include(p => p.Empleado)
             .Include(p => p.PesajesDetalle)
             .Where(criterio)
             .AsNoTracking()
