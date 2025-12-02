@@ -18,20 +18,20 @@ public class ControlesCalidadService(IDbContextFactory<ApplicationDbContext> DbF
             return await Modificar(control);
         }
     }
-    public async Task<bool> Existe(int controlId)
+    private async Task<bool> Existe(int controlId)
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
         return await contexto.Controles.AnyAsync(c => c.ControlId == controlId);
     }
 
-    public async Task<bool> Insertar(ControlesCalidad control)
+    private async Task<bool> Insertar(ControlesCalidad control)
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
         contexto.Controles.Add(control);
         return await contexto.SaveChangesAsync() > 0;
     }
 
-    public async Task<bool> Modificar(ControlesCalidad control)
+    private async Task<bool> Modificar(ControlesCalidad control)
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
         contexto.Update(control);
