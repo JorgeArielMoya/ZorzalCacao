@@ -151,7 +151,7 @@ else
 
                 <div class="modal-body">
                     <label class="col-12"> <strong> Recogida Id: </strong> @recogida.RecogidaId</label>
-                    <label class="col-12"> <strong> Fecha: </strong> @recogida.Fecha</label>
+                    <label class="col-12"> <strong> Fecha: </strong> @recogida.Fecha.ToString("dd/MM/yyyy HH:mm")</label>
                     <label class="col-12"> <strong> Productor: </strong> @recogida.Productor?.UserName</label>
                     <label class="col-12"> <strong> Punto de encuentro: </strong> @recogida.PuntoEncuentro</label>
                     <label class="col-12"> <strong> Certificaciones: </strong> @* @recogida.CertificacionesProducto *@</label>
