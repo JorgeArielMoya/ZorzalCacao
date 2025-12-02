@@ -1,5 +1,111 @@
-﻿<h3>RemocionPicker</h3>
+﻿<div class="row align-items-center">
+    <div class="col-12 col-md-3 mb-3">
+        <label class="col-form-label"> <strong> Remocion </strong></label>
+        <InputSelect class="form-select" @bind-Value="RemocionId">
+            <option value="" disabled selected> Seleccionar remocion </option>
+            @foreach (var remo in ListaRemociones)
+            {
+                <option value = "@remo.RemocionId"> @remo.NumeroRemocion (Cantidad removida: @remo.Cantidad) </option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="col-12 col-md-3 mb-3">
+        <label class="col-form-label"> <strong> Responsable </strong></label>
+        <InputSelect class="form-select" @bind-Value="EmpleadoId">
+            <option value=""> Seleccionar responsable </option>
+            @foreach (var empleado in ListaEmpleados)
+            {
+                <option value="@empleado.Id"> @empleado.UserName </option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="col-12 col-md-2 mb-3">
+        <label class="col-form-label"> <strong> Fecha </strong></label>
+        <InputDate Type="InputDateType.DateTimeLocal" class="form-control" @bind-Value="Fecha" />
+    </div>
+
+    <div class="col-12 col-md-2 mb-3">
+        <label class="col-form-label"> <strong> Cantidad </strong></label>
+        <InputNumber class="form-control" @bind-Value="Cantidad" />
+    </div>
+
+    <div class="col-12 col-md-2 mb-3">
+        <label class="col-form-label"> <strong> Temperatura </strong></label>
+        <div class="input-group">
+            <InputNumber class="form-control" @bind-Value="Temperatura" />
+            <button type="button" class="btn btn-success bi bi-plus-square" @onclick="TriggerSelection"></button>
+        </div>
+    </div>
+</div>
+
+@if(mensajeError != null)
+{
+    <div class="alert alert-danger"> @mensajeError</div>
+}
 
 @code {
+    [Parameter]
+    public int RemocionId { get; set; }
 
+    [Parameter]
+    public int Cantidad { get; set; }
+
+    [Parameter]
+    public string EmpleadoId { get; set; } = null!;
+
+    [Parameter]
+    public double Temperatura { get; set; }
+
+    [Parameter]
+    public DateTime Fecha { get; set; } = DateTime.Now;
+
+    [Parameter]
+    public List<Remociones> ListaRemociones { get; set; } = new();
+
+    [Parameter]
+    public List<ApplicationUser> ListaEmpleados { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<(Remociones remocion, double temperatura, int cantidad, ApplicationUser empleado, DateTime fecha)> OnRemocionSeleccionada { get; set; }
+    public string? mensajeError { get; set; }
+
+    public async Task TriggerSelection()
+    {
+        mensajeError = null;
+
+        if (RemocionId == 0)
+        {
+            mensajeError = "Por favor, seleccione una remoción";
+            return;
+        }
+        if (!(Temperatura >= 70 && Temperatura <= 95))
+        {
+            mensajeError = "Temperatura no válida. Debe estar entre 70°C y 95°C";
+            return;
+        }
+        if (Cantidad <= 0)
+        {
+            mensajeError = "Cantidad no válida";
+            return;
+        }
+        if (string.IsNullOrEmpty(EmpleadoId))
+        {
+            mensajeError = "Por favor, seleccione un empleado";
+            return;
+        }
+
+        var empleadoSeleccionado = ListaEmpleados.FirstOrDefault(e => e.Id == EmpleadoId);
+        if (empleadoSeleccionado == null)
+        {
+            mensajeError = "Empleado no encontrado";
+            return;
+        }
+
+        var remocionSeleccionada = ListaRemociones.Single(r => r.RemocionId == RemocionId);
+        
+
+        await OnRemocionSeleccionada.InvokeAsync((remocionSeleccionada, Temperatura, Cantidad, empleadoSeleccionado, Fecha));
+    }
 }
