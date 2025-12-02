@@ -112,6 +112,7 @@ public class FermentacionesService(IDbContextFactory<ApplicationDbContext> DbFac
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
         return await contexto.Fermentaciones
+            .Include(f => f.Empleado)
             .Include(d => d.FermentacionesDetalle)
             .FirstOrDefaultAsync(f => f.FermentacionId == fermentacionId);
     }
@@ -120,6 +121,7 @@ public class FermentacionesService(IDbContextFactory<ApplicationDbContext> DbFac
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
         return await contexto.Fermentaciones
+            .Include(f => f.Empleado)
             .Include(d => d.FermentacionesDetalle)
             .Where(criterio)
             .AsNoTracking()
