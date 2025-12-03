@@ -5,6 +5,6 @@ namespace ZorzalCacao.Models;
 public class Sacos
 {
     [Key]
-    public int SacoId { get; set; }
+    public int SacoId { get; set; } = 1;
     public double CantidadPesada { get; set; }
 }
