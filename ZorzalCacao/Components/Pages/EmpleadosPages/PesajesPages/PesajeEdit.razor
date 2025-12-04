@@ -118,7 +118,7 @@ else
                     <label class="col-12"> <strong> Fecha: </strong> @Pesaje.Fecha.ToShortDateString() </label>
                     <label class="col-12"> <strong> Empleado: </strong> @Pesaje.Empleado?.UserName </label>
                     <label class="col-12"> <strong> Cantidad Total: </strong> @cantidadTotal.ToString("F2") </label>
-                    <label class="col-12"> <strong> Peso Total: </strong> @(pesoTotal* cantidadTotal) </label>
+                    <label class="col-12"> <strong> Peso Total: </strong> @Pesaje.PesajesDetalle.Sum(d => d.Cantidad * d.Peso).ToString("F2") kg </label>
                     <label class="col-12"> <strong> Quintales: </strong> @quintales.ToString("F2") </label>
 
                     <label class="text-danger mt-3">
