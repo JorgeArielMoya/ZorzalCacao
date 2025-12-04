@@ -69,6 +69,7 @@ h1:focus {
 
 
 body {
+
     padding-left: 0 !important;
 }
 
@@ -77,3 +78,53 @@ body {
 #navmenu {
     overflow: hidden !important;
 }
+
+/*Cacao css*/
+
+.text-brown {
+    color: #5a3a1b;
+}
+
+.bg-cacao {
+    background: linear-gradient(135deg, #5a3a1b, #7b4b23);
+}
+
+.bg-cacao-light {
+    background-color: #f6efe9;
+}
+
+.btn-cacao {
+    background-color: #5a3a1b;
+    color: white;
+    border: none;
+}
+
+    .btn-cacao:hover {
+        background-color: #7b4b23;
+        color: white;
+    }
+
+.bg-cacao-vehiculo {
+    background-color: #c49a6c;
+    color: #3b220f;
+}
+
+.btn-outline-cacao {
+    border: 1px solid #5a3a1b;
+    color: #5a3a1b;
+}
+
+    .btn-outline-cacao:hover {
+        background-color: #5a3a1b;
+        color: white;
+    }
+
+.cacao-background {
+    background: linear-gradient(180deg, #f3e7da, #e2c9a8);
+    min-height: 90vh;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+}
+
+

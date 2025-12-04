@@ -50,6 +50,8 @@ builder.Services.AddScoped<RecogidasService>();
 builder.Services.AddScoped<ControlesCalidadService>();
 builder.Services.AddScoped<PesajesService>();
 builder.Services.AddScoped<FermentacionesService>();
+builder.Services.AddScoped<VehiculosService>();
+builder.Services.AddScoped<ChoferesService>();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
