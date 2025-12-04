@@ -1,14 +1,15 @@
 ﻿<div class="row align-items-center">
-    <div class="col-12 col-md-5 mb-3">
+    <div class="col-12 col-md-6 mb-3">
         <label class="col-form-label"> <strong> Cantidad </strong></label>
         <InputNumber class="form-control" @bind-Value="Cantidad" />
     </div>
-    <div class="col-12 col-md-5 mb-3">
+
+    <div class="col-12 col-md-6 mb-3">
         <label class="col-form-label"> <strong> Peso (KG) </strong></label>
-        <InputNumber class="form-control" @bind-Value="Peso" />
-    </div>
-    <div class="col-12 col-md-2 mb-3 d-flex align-items-end">
-        <button type="button" class="btn btn-success bi bi-plus " @onclick="TriggerSelection"></button>
+        <div class="input-group">
+            <InputNumber class="form-control" @bind-Value="Peso" />
+            <button type="button" class="btn btn-success bi bi-plus " @onclick="TriggerSelection"></button>
+        </div>
     </div>
 </div>
 
