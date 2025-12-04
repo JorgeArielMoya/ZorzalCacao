@@ -100,7 +100,6 @@
         </div>
 
         <div class="card-footer">
-            <label class="col-12"> <strong> Conteo pesajes: </strong> @ListaPesajes.Count</label>
             <label class="col-12"> <strong> Cantidad de sacos: </strong> @ListaPesajes.Sum(a => a.PesajesDetalle.Sum(f => f.Cantidad)).ToString("F2")</label>
             <label class="col-12"> <strong> Peso total: </strong>  @ListaPesajes.Sum(a => a.PesajesDetalle.Sum(f => f.Cantidad * f.Peso)).ToString("F2") </label>
             <label class="col-12"> <strong> Quintales totales: </strong> @((ListaPesajes.Sum(a => a.PesajesDetalle.Sum(f => f.Cantidad * f.Peso)) / 125).ToString("F2")) qq</label>
