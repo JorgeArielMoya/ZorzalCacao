@@ -165,7 +165,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //Pesaje = await pesajeService.Buscar(PesajeId);
+        Pesaje = await pesajeService.Buscar(PesajeId);
         ListaSacos = await pesajeService.ListarSacos(p => true);
     }
 
