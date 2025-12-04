@@ -79,7 +79,7 @@
 
                                 <tr>
                                     <td>@pesaje.PesajeId</td>
-                                    <td>@pesaje.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                                    <td>@pesaje.Fecha.ToShortDateString()</td>
                                     <td>@pesaje.Empleado?.UserName</td>
                                     <td>@cantidadTotal.ToString("F2")</td>
                                     <td>@(pesoTotal * cantidadTotal) </td>
