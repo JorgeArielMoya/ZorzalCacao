@@ -55,6 +55,7 @@
                             <th> Empleado </th>
                             <th> Cantidad Total </th>
                             <th> Peso Total </th>
+                            <th> Quintales </th>
                             <th> Opciones </th>
                         </tr>
                     </thead>
@@ -82,6 +83,7 @@
                                     <td>@pesaje.Empleado?.UserName</td>
                                     <td>@cantidadTotal.ToString("F2")</td>
                                     <td>@(pesoTotal * cantidadTotal) </td>
+                                    <td> @((detalles.Sum(d => d.Cantidad * d.Peso) / 125).ToString("F2"))</td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-primary bi bi-eye"
                                            href="/Pesaje/View/@pesaje.PesajeId"></a>
@@ -100,7 +102,8 @@
         <div class="card-footer">
             <label class="col-12"> <strong> Conteo pesajes: </strong> @ListaPesajes.Count</label>
             <label class="col-12"> <strong> Cantidad de sacos: </strong> @ListaPesajes.Sum(a => a.PesajesDetalle.Sum(f => f.Cantidad)).ToString("F2")</label>
-            <label> <strong> Peso total </strong>  @ListaPesajes.Sum(a => a.PesajesDetalle.Sum(f => f.Cantidad * f.Peso)).ToString("F2") </label>
+            <label class="col-12"> <strong> Peso total: </strong>  @ListaPesajes.Sum(a => a.PesajesDetalle.Sum(f => f.Cantidad * f.Peso)).ToString("F2") </label>
+            <label class="col-12"> <strong> Quintales totales: </strong> @((ListaPesajes.Sum(a => a.PesajesDetalle.Sum(f => f.Cantidad * f.Peso)) / 125).ToString("F2")) qq</label>
         </div>
     </div>
 </div>
