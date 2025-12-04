@@ -10,13 +10,9 @@ namespace ZorzalCacao.Services
         public async Task<bool> Guardar(Vehiculo vehiculo)
         {
             if (!await Existe(vehiculo.VehiculoId))
-            {
                 return await Insertar(vehiculo);
-            }
             else
-            {
                 return await Modificar(vehiculo);
-            }
         }
 
         private async Task<bool> Existe(int vehiculoId)
@@ -43,6 +39,7 @@ namespace ZorzalCacao.Services
         {
             await using var contexto = await DbFactory.CreateDbContextAsync();
             return await contexto.Vehiculos
+                .Include(v => v.Chofer)
                 .FirstOrDefaultAsync(v => v.VehiculoId == vehiculoId);
         }
 
@@ -59,10 +56,12 @@ namespace ZorzalCacao.Services
         {
             await using var contexto = await DbFactory.CreateDbContextAsync();
             return await contexto.Vehiculos
+                .Include(v => v.Chofer)
                 .Where(criterio)
                 .AsNoTracking()
                 .ToListAsync();
         }
     }
 }
+
 
