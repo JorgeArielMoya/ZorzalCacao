@@ -31,12 +31,18 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             );
         });
 
-        // Relación entre Recogida y ApplicationUser (Productor)
+        builder.Entity<Sacos>(entity =>
+        {
+            entity.HasData(
+                new Sacos{ SacoId = 1, Descripcion = "Saco estándar",}
+            );
+        });
+
         builder.Entity<Recogidas>()
             .HasOne(r => r.Productor)
-            .WithMany() // o WithMany(u => u.Recogidas) si agregas navegación inversa
+            .WithMany() 
             .HasForeignKey(r => r.ProductorId)
-            .OnDelete(DeleteBehavior.Restrict); // No eliminar recogidas si se borra el usuario
+            .OnDelete(DeleteBehavior.Restrict); 
 
         builder.Entity<FermentacionesDetalles>(entity =>
         {
