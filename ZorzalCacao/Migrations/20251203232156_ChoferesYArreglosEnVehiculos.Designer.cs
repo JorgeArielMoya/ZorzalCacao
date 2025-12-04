@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZorzalCacao.Data;
 
@@ -11,9 +12,11 @@ using ZorzalCacao.Data;
 namespace ZorzalCacao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251203232156_ChoferesYArreglosEnVehiculos")]
+    partial class ChoferesYArreglosEnVehiculos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -368,16 +371,10 @@ namespace ZorzalCacao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PesajeId"));
 
-                    b.Property<string>("EmpleadoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.HasKey("PesajeId");
-
-                    b.HasIndex("EmpleadoId");
 
                     b.ToTable("Pesajes");
                 });
@@ -508,21 +505,9 @@ namespace ZorzalCacao.Migrations
                     b.Property<double>("CantidadPesada")
                         .HasColumnType("float");
 
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("SacoId");
 
                     b.ToTable("Sacos");
-
-                    b.HasData(
-                        new
-                        {
-                            SacoId = 1,
-                            CantidadPesada = 0.0,
-                            Descripcion = "Saco estándar"
-                        });
                 });
 
             modelBuilder.Entity("ZorzalCacao.Models.Vehiculo", b =>
@@ -680,17 +665,6 @@ namespace ZorzalCacao.Migrations
                     b.Navigation("Fermentacion");
 
                     b.Navigation("Remocion");
-                });
-
-            modelBuilder.Entity("ZorzalCacao.Models.Pesajes", b =>
-                {
-                    b.HasOne("ZorzalCacao.Data.ApplicationUser", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empleado");
                 });
 
             modelBuilder.Entity("ZorzalCacao.Models.PesajesDetalles", b =>

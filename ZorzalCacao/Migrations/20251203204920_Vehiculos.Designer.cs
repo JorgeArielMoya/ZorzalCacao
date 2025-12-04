@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZorzalCacao.Data;
 
@@ -11,9 +12,11 @@ using ZorzalCacao.Data;
 namespace ZorzalCacao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251203204920_Vehiculos")]
+    partial class Vehiculos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,39 +223,6 @@ namespace ZorzalCacao.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("ZorzalCacao.Models.Choferes", b =>
-                {
-                    b.Property<int>("ChoferId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChoferId"));
-
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cedula")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Licencia")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ChoferId");
-
-                    b.ToTable("Choferes");
-                });
-
             modelBuilder.Entity("ZorzalCacao.Models.ControlesCalidad", b =>
                 {
                     b.Property<int>("ControlId")
@@ -368,16 +338,10 @@ namespace ZorzalCacao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PesajeId"));
 
-                    b.Property<string>("EmpleadoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.HasKey("PesajeId");
-
-                    b.HasIndex("EmpleadoId");
 
                     b.ToTable("Pesajes");
                 });
@@ -508,21 +472,9 @@ namespace ZorzalCacao.Migrations
                     b.Property<double>("CantidadPesada")
                         .HasColumnType("float");
 
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("SacoId");
 
                     b.ToTable("Sacos");
-
-                    b.HasData(
-                        new
-                        {
-                            SacoId = 1,
-                            CantidadPesada = 0.0,
-                            Descripcion = "Saco estándar"
-                        });
                 });
 
             modelBuilder.Entity("ZorzalCacao.Models.Vehiculo", b =>
@@ -560,8 +512,6 @@ namespace ZorzalCacao.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VehiculoId");
-
-                    b.HasIndex("ChoferId");
 
                     b.ToTable("Vehiculos");
                 });
@@ -682,17 +632,6 @@ namespace ZorzalCacao.Migrations
                     b.Navigation("Remocion");
                 });
 
-            modelBuilder.Entity("ZorzalCacao.Models.Pesajes", b =>
-                {
-                    b.HasOne("ZorzalCacao.Data.ApplicationUser", "Empleado")
-                        .WithMany()
-                        .HasForeignKey("EmpleadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Empleado");
-                });
-
             modelBuilder.Entity("ZorzalCacao.Models.PesajesDetalles", b =>
                 {
                     b.HasOne("ZorzalCacao.Models.Pesajes", "Pesaje")
@@ -721,21 +660,6 @@ namespace ZorzalCacao.Migrations
                         .IsRequired();
 
                     b.Navigation("Productor");
-                });
-
-            modelBuilder.Entity("ZorzalCacao.Models.Vehiculo", b =>
-                {
-                    b.HasOne("ZorzalCacao.Models.Choferes", "Chofer")
-                        .WithMany("Vehiculos")
-                        .HasForeignKey("ChoferId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Chofer");
-                });
-
-            modelBuilder.Entity("ZorzalCacao.Models.Choferes", b =>
-                {
-                    b.Navigation("Vehiculos");
                 });
 
             modelBuilder.Entity("ZorzalCacao.Models.Fermentaciones", b =>
