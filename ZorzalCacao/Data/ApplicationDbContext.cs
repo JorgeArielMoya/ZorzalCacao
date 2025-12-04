@@ -17,6 +17,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<FermentacionesDetalles> FermentacionesDetalles { get; set; }
     public DbSet<Sacos> Sacos { get; set; }
     public DbSet<Vehiculo> Vehiculos { get; set; }
+    public DbSet<Choferes> Choferes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -38,6 +39,12 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             .WithMany() // o WithMany(u => u.Recogidas) si agregas navegación inversa
             .HasForeignKey(r => r.ProductorId)
             .OnDelete(DeleteBehavior.Restrict); // No eliminar recogidas si se borra el usuario
+
+        builder.Entity<Vehiculo>()
+            .HasOne(v => v.Chofer)
+            .WithMany(c => c.Vehiculos)
+            .HasForeignKey(v => v.ChoferId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.Entity<FermentacionesDetalles>(entity =>
         {
