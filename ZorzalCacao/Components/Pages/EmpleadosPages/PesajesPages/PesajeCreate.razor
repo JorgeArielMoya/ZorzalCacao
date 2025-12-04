@@ -105,12 +105,6 @@
         if (string.IsNullOrEmpty(Pesaje.EmpleadoId))
             throw new Exception("No se pudo obtener el EmpleadoId logueado.");
 
-        // Asignar la fecha actual automáticamente si no se ha seleccionado
-        if (Pesaje.Fecha == default(DateTime))
-        {
-            Pesaje.Fecha = DateTime.Now;
-        }
-
         if (await pesajeService.Guardar(Pesaje))
         {
             navigationManager.NavigateTo("/Pesaje/Index");
