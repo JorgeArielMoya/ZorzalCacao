@@ -26,7 +26,7 @@
             <div class="col-auto">
                 <div class="stats-item stats-box">
                     <i class="bi bi-hourglass-split"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
+                    <span class="purecounter"> @ListaPendientes.Count </span>
                     <p><strong>Recogidas Pendientes</strong></p>
                     <span class="description">Aún no completadas</span>
                 </div>
@@ -35,7 +35,7 @@
             <div class="col-auto">
                 <div class="stats-item stats-box">
                     <i class="bi bi-check2-circle"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="purecounter"></span>
+                    <span class="purecounter"> @ListaEntregadas.Count</span>
                     <p><strong>Recogidas Entregadas</strong></p>
                     <span class="description">Completadas exitosamente</span>
                 </div>
@@ -44,7 +44,7 @@
             <div class="col-auto">
                 <div class="stats-item stats-box">
                     <i class="bi bi-geo-alt"></i>
-                    <span data-purecounter-start="0" data-purecounter-end="8" data-purecounter-duration="1" class="purecounter"></span>
+                    <span class="purecounter"> @ListaZonas.Count</span>
                     <p><strong>Zonas de Producción</strong></p>
                     <span class="description">Áreas de cobertura</span>
                 </div>
@@ -114,7 +114,7 @@
 @code {
     public List<Recogidas> ListaPendientes = new List<Recogidas>();
 
-    public List<Recogidas> ListaCompletadas = new List<Recogidas>();
+    public List<Recogidas> ListaEntregadas = new List<Recogidas>();
 
     public List<ZonasProduccion> ListaZonas = new List<ZonasProduccion>();
 
@@ -123,7 +123,7 @@
     protected override async Task OnInitializedAsync()
     {
         ListaPendientes = await recogidaService.Listar(r => r.EstadoEntrega == "Pendiente");
-        ListaCompletadas = await recogidaService.Listar(r => r.EstadoEntrega == "Entregada");
+        ListaEntregadas = await recogidaService.Listar(r => r.EstadoEntrega == "Entregada");
 
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
