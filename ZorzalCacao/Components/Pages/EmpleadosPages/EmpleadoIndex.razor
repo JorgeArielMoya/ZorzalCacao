@@ -1,4 +1,9 @@
 ﻿@page "/Empleado/Index"
+@inject FermentacionesService fermentacionService
+@inject RecogidasService recogidasService
+@inject PesajesService pesajesService
+@inject ChoferesService choferesService
+@inject IUserRoleService UserRoleService
 @rendermode InteractiveServer
 
 @attribute [Authorize(Roles = "Empleado")]
@@ -169,3 +174,30 @@
 
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+@code{
+    public List<ApplicationUser> ListaProductores = new List<ApplicationUser>();
+
+    public List<ApplicationUser> ListaEmpleados = new List<ApplicationUser>();
+
+    public List<Recogidas> ListaPendientes = new List<Recogidas>();
+
+    public List<Choferes> ListaChoferes = new List<Choferes>();
+
+    public List<Pesajes> ListaPesajes = new List<Pesajes>();
+
+    public List<Fermentaciones> ListaFermentaciones = new List<Fermentaciones>();
+
+    protected override async Task OnInitializedAsync ()
+    {
+        //Listado de productores y empleados
+        ListaProductores = await UserRoleService.GetUsersByRoleAsync("Productor");
+        ListaEmpleados = await UserRoleService.GetUsersByRoleAsync("Empleado");
+
+        //Listado de actividades 
+        ListaPendientes = await recogidasService.Listar(r => r.EstadoEntrega == "Pendiente");
+        ListaChoferes = await choferesService.Listar(c => true);
+        ListaPesajes = await pesajesService.Listar(p => true);
+        ListaFermentaciones = await fermentacionService.Listar(f => true);
+    }
+}
