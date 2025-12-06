@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ZorzalCacao.Data;
 
 namespace ZorzalCacao.Models;
 
@@ -14,4 +15,6 @@ public class ZonasProduccion
 
     [Range(0.01, double.MaxValue, ErrorMessage = "Distancia no valida")]
     public double Distancia { get; set; }
+    public string ProductorId { get; set; }
+    public ApplicationUser Productor { get; set; }
 }
