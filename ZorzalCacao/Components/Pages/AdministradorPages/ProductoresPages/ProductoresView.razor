@@ -3,6 +3,10 @@
 @inject NavigationManager navigation
 @rendermode InteractiveServer
 
+@attribute [Authorize(Roles = "Administrador")]
+
+<PageTitle> Detalles del productor </PageTitle>
+
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-8">
