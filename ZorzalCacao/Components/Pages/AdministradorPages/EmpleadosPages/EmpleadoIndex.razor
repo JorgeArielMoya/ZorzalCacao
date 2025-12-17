@@ -3,6 +3,8 @@
 @inject NavigationManager nav
 @rendermode InteractiveServer
 
+@attribute [Authorize(Roles = "Administrador")]
+
 <PageTitle>Consulta de Empleados</PageTitle>
 
 <div class="container-fluid px-4 mt-4 cacao-background">
