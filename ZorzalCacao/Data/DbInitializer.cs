@@ -9,7 +9,6 @@ public static class DbInitializer
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
         var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-        // Crear roles
         string[] roleNames = { "Productor", "Administrador", "Empleado" };
         foreach (var roleName in roleNames)
         {
@@ -19,13 +18,10 @@ public static class DbInitializer
             }
         }
 
-        // Crear usuario Productor
         await CreateUserIfNotExists(userManager, "productor", "productor@example.com", "Productor123!", "Productor");
 
-        // Crear usuario Administrador
         await CreateUserIfNotExists(userManager, "administrador", "admin@example.com", "Admin123!", "Administrador");
 
-        // Crear usuario Empleado
         await CreateUserIfNotExists(userManager, "empleado", "empleado@example.com", "Empleado123!", "Empleado");
     }
 
