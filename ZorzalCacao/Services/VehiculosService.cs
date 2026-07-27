@@ -62,5 +62,3 @@ public class VehiculosService(IDbContextFactory<ApplicationDbContext> DbFactory)
             .ToListAsync();
     }
 }
-
-

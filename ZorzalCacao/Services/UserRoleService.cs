@@ -47,6 +47,4 @@ public class UserRoleService : IUserRoleService
     {
         return await _userManager.FindByIdAsync(userId);
     }
-
 }
-

@@ -137,4 +137,3 @@ public class PesajesService(IDbContextFactory<ApplicationDbContext> DbFactory)
         Resta = 2
     }
 }
-
