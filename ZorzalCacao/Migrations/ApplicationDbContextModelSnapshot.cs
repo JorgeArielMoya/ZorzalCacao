@@ -274,7 +274,8 @@ namespace ZorzalCacao.Migrations
 
                     b.Property<string>("Observaciones")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("RecogidaId")
                         .HasColumnType("int");
@@ -309,7 +310,8 @@ namespace ZorzalCacao.Migrations
 
                     b.Property<string>("Observaciones")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("TipoEvento")
                         .IsRequired()
@@ -317,7 +319,8 @@ namespace ZorzalCacao.Migrations
 
                     b.Property<string>("Zona")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("EventoClimaticoId");
 
@@ -343,7 +346,8 @@ namespace ZorzalCacao.Migrations
 
                     b.Property<string>("Observaciones")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("RecogidaId")
                         .HasColumnType("int");
@@ -480,7 +484,8 @@ namespace ZorzalCacao.Migrations
 
                     b.Property<string>("PuntoEncuentro")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("RecogidaId");
 
@@ -636,7 +641,8 @@ namespace ZorzalCacao.Migrations
 
                     b.Property<string>("Referencia")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("ZonaId");
 

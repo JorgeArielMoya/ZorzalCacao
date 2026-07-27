@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ZorzalCacao.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -58,11 +58,10 @@ namespace ZorzalCacao.Migrations
                 {
                     ChoferId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cedula = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Licencia = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cedula = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -210,10 +209,10 @@ namespace ZorzalCacao.Migrations
                     EventoClimaticoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Zona = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Zona = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     TipoEvento = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Intensidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Observaciones = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Observaciones = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     EmpleadoId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -253,10 +252,10 @@ namespace ZorzalCacao.Migrations
                 {
                     ZonaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Provincia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Provincia = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Distancia = table.Column<double>(type: "float", nullable: false),
-                    Referencia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Referencia = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     ProductorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -277,11 +276,11 @@ namespace ZorzalCacao.Migrations
                     RecogidaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PuntoEncuentro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CertificacionesProducto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PuntoEncuentro = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    CertificacionProducto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EstadoEntrega = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CantidadSacos = table.Column<double>(type: "float", nullable: false),
-                    ChoferId = table.Column<int>(type: "int", nullable: true),
+                    ChoferId = table.Column<int>(type: "int", nullable: false),
                     ProductorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -297,7 +296,8 @@ namespace ZorzalCacao.Migrations
                         name: "FK_Recogidas_Choferes_ChoferId",
                         column: x => x.ChoferId,
                         principalTable: "Choferes",
-                        principalColumn: "ChoferId");
+                        principalColumn: "ChoferId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -306,11 +306,11 @@ namespace ZorzalCacao.Migrations
                 {
                     VehiculoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Placa = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Marca = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Modelo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Placa = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
                     Anio = table.Column<int>(type: "int", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     TipoVehiculo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChoferId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -360,7 +360,7 @@ namespace ZorzalCacao.Migrations
                     ControlId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GradosBrix = table.Column<double>(type: "float", nullable: false),
-                    Observaciones = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Observaciones = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Decision = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RecogidaId = table.Column<int>(type: "int", nullable: false),
                     EmpleadoId = table.Column<string>(type: "nvarchar(450)", nullable: false)
@@ -389,7 +389,7 @@ namespace ZorzalCacao.Migrations
                     FermentacionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Temperatura = table.Column<double>(type: "float", nullable: false),
-                    Observaciones = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Observaciones = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RecogidaId = table.Column<int>(type: "int", nullable: false),
                     EmpleadoId = table.Column<string>(type: "nvarchar(450)", nullable: false)
