@@ -1,11 +1,6 @@
 ﻿@page "/"
 @page "/Account/Login"
 
-@using System.ComponentModel.DataAnnotations
-@using Microsoft.AspNetCore.Authentication
-@using Microsoft.AspNetCore.Identity
-@using ZorzalCacao.Data
-
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
 @inject ILogger<Login> Logger
@@ -78,7 +73,6 @@
         Input ??= new();
         editContext = new EditContext(Input);
 
-        // Verificar si el usuario ya está autenticado
         if (AuthenticationState is not null)
         {
             var authState = await AuthenticationState;
@@ -86,14 +80,12 @@
 
             if (user.Identity?.IsAuthenticated == true)
             {
-                // Obtener el usuario completo para verificar sus roles
                 var applicationUser = await UserManager.GetUserAsync(user);
 
                 if (applicationUser != null)
                 {
                     var roles = await UserManager.GetRolesAsync(applicationUser);
 
-                    // Redirigir según el rol
                     if (roles.Contains("Administrador"))
                     {
                         NavigationManager.NavigateTo("/Administrador/Index", true);
@@ -114,8 +106,7 @@
         }
 
         if (HttpMethods.IsGet(HttpContext.Request.Method))
-        {
-            // Clear the existing external cookie to ensure a clean login process
+        {        
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
         }
     }
@@ -161,7 +152,6 @@
         {
             Logger.LogInformation("User logged in.");
 
-            // Redirigir según el rol del usuario
             if (user != null)
             {
                 var roles = await UserManager.GetRolesAsync(user);
@@ -180,7 +170,6 @@
                 }
                 else
                 {
-                    // Si no tiene ningún rol específico, usar ReturnUrl o página por defecto
                     RedirectManager.RedirectTo(ReturnUrl ?? "/");
                 }
             }
