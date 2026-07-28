@@ -8,7 +8,6 @@
 
 <div class="container-fluid px-4 mt-4 cacao-background">
 
-    <!-- 🟫 ENCABEZADO CACAO -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h3 class="fw-bold text-brown mb-0">
@@ -23,10 +22,8 @@
         </a>
     </div>
 
-    <!-- 🟫 TARJETA PRINCIPAL -->
     <div class="card shadow border-0 rounded-4 bg-cacao-light">
 
-        <!-- 🟫 FILTROS -->
         <div class="card-body border-bottom bg-cacao rounded-top-4">
             <div class="row align-items-end g-3">
 
@@ -65,7 +62,6 @@
             </div>
         </div>
 
-        <!-- 🟫 TABLA CACAO -->
         <div class="table-responsive">
             <table class="table align-middle mb-0 text-center">
 
@@ -130,7 +126,6 @@
             </table>
         </div>
 
-        <!-- 🟫 FOOTER CON CONTADORES -->
         <div class="card-footer">
             <span class="badge bg-dark fs-6 m-0">
                 Pendientes: @(ListaRecogidas?.Count(r => r.EstadoEntrega == "Pendiente") ?? 0)
@@ -166,7 +161,6 @@
 
     public async Task Buscar()
     {
-        // IMPORTANTE: Asegúrate de incluir el Productor en la consulta
         var lista = await recogidasService.Listar(R => true);
 
         if (Desde.HasValue && Hasta.HasValue)

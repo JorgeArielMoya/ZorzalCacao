@@ -34,8 +34,6 @@ public class ChoferesService(IDbContextFactory<ApplicationDbContext> DbFactory)
         contexto.Update(chofer);
         return await contexto.SaveChangesAsync() > 0;
     }
-
-    // ✅ BUSCAR CON VEHÍCULOS
     public async Task<Choferes?> Buscar(int id)
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
@@ -61,11 +59,9 @@ public class ChoferesService(IDbContextFactory<ApplicationDbContext> DbFactory)
     {
         await using var contexto = await DbFactory.CreateDbContextAsync();
         return await contexto.Choferes
-            .Include(c => c.Vehiculos) // ✅ INCLUYE VEHÍCULOS
+            .Include(c => c.Vehiculos)
             .Where(criterio)
             .AsNoTracking()
             .ToListAsync();
     }
 }
-
-

@@ -37,4 +37,3 @@ public class Vehiculo
     public int? ChoferId { get; set; }   
     public Choferes? Chofer { get; set; }  
 }
-

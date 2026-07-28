@@ -24,14 +24,12 @@
             <div class="card-body">
 
                 <div class="row">
-                    <!-- Grados Brix -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"> <strong> Grados Brix </strong></label>
                         <InputNumber class="form-control" @bind-Value="control.GradosBrix" />
                         <ValidationMessage For="() => control.GradosBrix" />
                     </div>
 
-                    <!--Recogida-->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Recogida</strong></label>
                         <InputSelect class="form-select" @bind-Value="control.RecogidaId">
@@ -98,5 +96,3 @@
         }
     }
 }
-
-

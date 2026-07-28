@@ -12,8 +12,7 @@
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-8">
 
-            <div class="card shadow-lg border-0">
-                <!-- Encabezado -->
+            <div class="card shadow-lg border-0">           
                 <div class="card-header bg-accent text-white py-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -29,7 +28,6 @@
 
                 <div class="card-body p-4">
 
-                    <!-- Grados Brix -->
                     <div class="row mb-4">
                         <div class="col-12">
                             <div class="detail-card p-4 rounded border-start border-primary border-4">
@@ -46,7 +44,6 @@
                         </div>
                     </div>
 
-                    <!-- Decisión -->
                     <div class="row mb-4">
                         <div class="col-12">
                             <div class="detail-card p-4 rounded border-start @(control.Decision == "Aprobado" ? "border-success" : "border-danger") border-4">
@@ -65,7 +62,6 @@
                         </div>
                     </div>
 
-                    <!-- Observaciones -->
                     <div class="row mb-4">
                         <div class="col-12">
                             <div class="detail-card p-4 rounded border-start border-info border-4">
@@ -82,7 +78,6 @@
                         </div>
                     </div>
 
-                    <!-- Recogida -->
                     <div class="row mb-4">
                         <div class="col-12">
                             <div class="detail-card p-4 rounded border-start border-warning border-4">
@@ -99,7 +94,6 @@
                         </div>
                     </div>
 
-                    <!-- Empleado -->
                     <div class="row mb-4">
                         <div class="col-12">
                             <div class="detail-card p-4 rounded border-start border-secondary border-4">
@@ -117,7 +111,6 @@
                     </div>
                 </div>
 
-                <!-- Footer -->
                 <div class="card-footer bg-white d-flex justify-content-center gap-2">
                     <a href="/ControlesCalidad/Index" class="btn btn-outline-accent bi bi-arrow-left-circle"> Regresar </a>
                 </div>
@@ -137,4 +130,3 @@
         control = await controlesService.Buscar(ControlId);
     }
 }
-

@@ -22,14 +22,12 @@
             <div class="card-body">
 
                 <div class="row">
-                    <!-- Marca -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Marca</strong></label>
                         <InputText class="form-control" @bind-Value="vehiculo.Marca" />
                         <ValidationMessage For="() => vehiculo.Marca" />
                     </div>
 
-                    <!-- Modelo -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Modelo</strong></label>
                         <InputText class="form-control" @bind-Value="vehiculo.Modelo" />
@@ -38,14 +36,12 @@
                 </div>
 
                 <div class="row">
-                    <!-- Placa -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Placa</strong></label>
                         <InputText class="form-control" @bind-Value="vehiculo.Placa" />
                         <ValidationMessage For="() => vehiculo.Placa" />
                     </div>
 
-                    <!-- Año -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Año</strong></label>
                         <InputNumber class="form-control" @bind-Value="vehiculo.Anio" />
@@ -54,14 +50,12 @@
                 </div>
 
                 <div class="row">
-                    <!-- Color -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Color</strong></label>
                         <InputText class="form-control" @bind-Value="vehiculo.Color" />
                         <ValidationMessage For="() => vehiculo.Color" />
                     </div>
 
-                    <!-- Tipo de Vehículo -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Tipo de vehículo</strong></label>
                         <InputSelect class="form-select" @bind-Value="vehiculo.TipoVehiculo">
@@ -121,5 +115,3 @@
         }
     }
 }
-
-

@@ -69,7 +69,6 @@
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Certificaciones del producto</strong></label>
 
-                         <!-- Primera fila de checkboxes -->
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-check">
@@ -91,7 +90,6 @@
                             </div>
                         </div>
 
-                        <!-- Segunda fila de checkboxes -->
                         <div class="row mt-2">
                             <div class="col-4">
                                 <div class="form-check">
@@ -131,10 +129,8 @@
 
     private List<Choferes> ListaChoferes = new();
 
-    // Lista temporal para los checkboxes
     private List<string> CertificacionesSeleccionadas = new();
 
-    // Variables para cada checkbox
     private bool certNOP
     {
         get => CertificacionesSeleccionadas.Contains("NOP");
@@ -239,7 +235,6 @@
    
     protected override async Task OnInitializedAsync()
     {
-        // Obtener usuarios con rol "Productor"
         var productores = await UserRoleService.GetUsersByRoleAsync("Productor");
         ListaProductores = productores.ToList();
 

@@ -19,13 +19,11 @@
 
             <div class="card-body">
                 <div class="row">
-                    <!-- Usuario -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Usuario</strong></label>
                         <InputText class="form-control" @bind-Value="userEdit.UserName" />
                     </div>
 
-                    <!-- Email -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Email</strong></label>
                         <InputText class="form-control" @bind-Value="userEdit.Email" />
@@ -76,7 +74,6 @@
 
     public ApplicationUser? user { get; set; } = new();
 
-    // Modelo editable
     public ApplicationUser userEdit { get; set; } = new();
 
     private bool MostrarModal = false;
@@ -89,7 +86,6 @@
 
             if (user != null)
             {
-                // Clonar datos al modelo editable
                 userEdit = new ApplicationUser
                 {
                     UserName = user.UserName,

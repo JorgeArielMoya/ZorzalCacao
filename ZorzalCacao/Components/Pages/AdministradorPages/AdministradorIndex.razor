@@ -6,7 +6,6 @@
 
 <PageTitle>Menu administrador </PageTitle>
 
-<!-- Stats Title -->
 <div class="container section-title">
     <h2 style="font-weight: 700; font-size: 32px; color: #222;">Estadísticas del Sistema</h2>
     <p style="color: #555; font-size: 16px;">
@@ -14,12 +13,10 @@
     </p>
 </div>
 
-<!-- Stats Section - Solo Productores y Empleados -->
 <section id="stats" class="stats section">
     <div class="container">
         <div class="row justify-content-center" style="gap: 30px;">
 
-            <!-- Productores -->
             <div class="col-auto">
                 <div class="stats-item stats-box">
                     <i class="bi bi-people"></i>
@@ -29,7 +26,6 @@
                 </div>
             </div>
 
-            <!-- Empleados -->
             <div class="col-auto">
                 <div class="stats-item stats-box">
                     <i class="bi bi-person-badge"></i>
@@ -42,7 +38,6 @@
     </div>
 </section>
 
-<!-- Servicios - Solo consulta de Productores y Empleados -->
 <section id="services" class="services section">
 
     <div class="container section-title">
@@ -55,7 +50,6 @@
     <div class="container">
         <div class="row gy-4">
 
-            <!-- Consulta de Productores -->
             <div class="col-lg-4 col-md-6 service-item d-flex">
                 <div class="icon flex-shrink-0"><i class="bi bi-people"></i></div>
                 <div>
@@ -66,7 +60,6 @@
                 </div>
             </div>
 
-            <!-- Consulta de Empleados -->
             <div class="col-lg-4 col-md-6 service-item d-flex">
                 <div class="icon flex-shrink-0"><i class="bi bi-person-badge"></i></div>
                 <div>
@@ -88,7 +81,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //Listado de productores y empleados
         var productores = await UserRoleService.GetUsersByRoleAsync("Productor");
         ListaProductores = productores.ToList();
 
