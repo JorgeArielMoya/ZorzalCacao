@@ -21,21 +21,18 @@
 
             <div class="card-body">
                 <div class="row">
-                    <!-- Nombre -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Nombre de la zona</strong></label>
                         <InputText class="form-control" @bind-Value="zona.Nombre" />
                         <ValidationMessage For="() => zona.Nombre" />
                     </div>
 
-                    <!-- Provincia -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Provincia</strong></label>
                         <InputText class="form-control" @bind-Value="zona.Provincia" />
                         <ValidationMessage For="() => zona.Provincia" />
                     </div>
 
-                    <!-- Distancia -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Distancia (km)</strong></label>
                         <InputNumber class="form-control" @bind-Value="zona.Distancia" />
