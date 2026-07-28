@@ -135,7 +135,6 @@ else if (mensajeExito != null)
 
         var remocionSeleccionada = ListaRemociones.Single(r => r.RemocionId == RemocionId);
 
-        // Verificar si es la última remoción
         if (CantidadEnDetalle + 1 >= ListaRemociones.Count)
         {
             mensajeExito = "¡Se han completado todas las remociones exitosamente!";

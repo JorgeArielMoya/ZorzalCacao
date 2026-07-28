@@ -230,13 +230,11 @@
     {
         Fermentacion = await fermentacionesServices.Buscar(FermentacionId);
 
-        // Carga de listas auxiliares
         ListaRecogidas = await recogidasService.Listar(r => r.EstadoEntrega == "Entregada");
         ListaRemociones = await fermentacionesServices.ListarRemociones(f => true);
         var empleados = await UserRoleService.GetUsersByRoleAsync("Empleado");
         ListaEmpleados = empleados.ToList();
 
-        // 1. LÓGICA DE EDICIÓN: Si ya hay detalles, procesoIniciado es TRUE inmediatamente.
         if (Fermentacion.FermentacionesDetalle != null && Fermentacion.FermentacionesDetalle.Any())
         {
             procesoIniciado = true;
@@ -264,7 +262,7 @@
         }
 
         procesoIniciado = true;
-        IniciarTemporizador(10); // Primer temporizador de 10 segundos
+        IniciarTemporizador(10);
     }
 
     private void IniciarTemporizador(int segundos)
@@ -317,12 +315,10 @@
         Fermentacion.FermentacionesDetalle.Add(nuevoDetalle);
         detalleSeleccionado = new();
 
-        // Iniciar temporizador según la cantidad de remociones realizadas
         var cantidadRemociones = Fermentacion.FermentacionesDetalle.Count;
 
         if (cantidadRemociones < ListaRemociones.Count)
         {
-            // 1ra y 2da: 10 segundos, 3ra: 5 segundos
             int tiempoEspera = cantidadRemociones < 2 ? 10 : 5;
             IniciarTemporizador(tiempoEspera);
         }

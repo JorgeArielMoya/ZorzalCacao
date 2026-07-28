@@ -24,14 +24,12 @@
 
                 <div class="row">
 
-                    <!-- Fecha -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Fecha</strong></label>
                         <InputDate class="form-control" @bind-Value="evento.Fecha" />
                         <ValidationMessage For="() => evento.Fecha" />
                     </div>
 
-                    <!-- Zona -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Zona</strong></label>
                         <InputText class="form-control" @bind-Value="evento.Zona" />
@@ -42,7 +40,6 @@
 
                 <div class="row">
 
-                    <!-- Tipo de evento -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Tipo de evento</strong></label>
                         <InputSelect class="form-select" @bind-Value="evento.TipoEvento">
@@ -56,7 +53,6 @@
                         <ValidationMessage For="() => evento.TipoEvento" />
                     </div>
 
-                    <!-- Intensidad -->
                     <div class="col-12 col-md-6 mb-3">
                         <label class="col-form-label text-heading"><strong>Intensidad</strong></label>
                         <InputSelect class="form-select" @bind-Value="evento.Intensidad">
@@ -72,7 +68,6 @@
 
                 <div class="row">
 
-                    <!-- Observaciones -->
                     <div class="col-12 col-md-12 mb-3">
                         <label class="col-form-label text-heading"><strong>Observaciones</strong></label>
                         <InputTextArea class="form-control" @bind-Value="evento.Observaciones" />
@@ -158,5 +153,3 @@
         }
     }
 }
-
-
