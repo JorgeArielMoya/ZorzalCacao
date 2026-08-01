@@ -22,9 +22,12 @@ Aplicación web orientada a optimizar, digitalizar y supervisar de forma integra
 
 ## 🛠️ Tecnologías Utilizadas
 
-* **Desarrollo Backend & Frontend** (Plataforma web integrada para la gestión industrial)
-* **Gestión de Bases de Datos** (Control y trazabilidad de lotes, inventarios y personal)
-* **Arquitectura de Roles y Permisos** (Seguridad basada en perfiles: Administrador, Empleado y Productor)
+- **C#** – Desarrollo de la lógica de negocio, servicios y backend de la aplicación.
+- **ASP.NET Core Blazor** – Desarrollo de la aplicación web y la interfaz de usuario mediante componentes Razor.
+- **HTML** – Estructuración del contenido y las vistas de la aplicación.
+- **CSS** – Diseño y personalización de la interfaz de usuario.
+- **JavaScript** – Implementación de funcionalidades interactivas y comportamiento del lado del cliente.
+- **SQL Server** – Sistema de gestión de bases de datos para el almacenamiento y la trazabilidad de la información del sistema.
 
 ---
 
